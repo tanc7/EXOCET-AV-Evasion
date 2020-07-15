@@ -62,7 +62,7 @@ For 64-bit Linux Targets
 
 `env GOOS=linux GOARCH=amd64 go build outputmalware.go`
 
-See this reference on github for your parameters for other operating systems like Android ![](https://gist.github.com/asukakenji/f15ba7e588ac42795f421b48b8aede63)
+See this reference on github for your parameters for other operating systems like Android <a href="https://gist.github.com/asukakenji/f15ba7e588ac42795f421b48b8aede63">Reference for Go Cross Compilation</a>
 
 Furthermore, there are prebuilt binaries that I have made, meaning you just have to run `./EXOCET` or `EXOCET-Windows.exe`
 
