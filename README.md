@@ -14,7 +14,7 @@ However, it is possible to use Metasploit to build a Evasive Payload, and then c
 
 Much like my previous project, DarkLordObama, this toolkit is designed to be a delivery/launch vehicle, much like Veil-Evasion does. 
 
-![](https://github.com/tanc7/dark-lord-obama)
+<a href="https://github.com/tanc7/dark-lord-obama">Dark Lord Obama Project</a>
 
 However, EXOCET is not limited to a single codebase or platforms that are running Python. EXOCET works on ALL supported platforms and architectures that Go supports.
 
@@ -69,13 +69,14 @@ If you are targeting Windows systems, it's highly recommended that you use `EXOC
 
 # EXOCET live demo
 
-![](https://github.com/tanc7/EXOCET-AV-Evasion/raw/master/exocetdemo.mp4)
+<iframe width="560" height="315" src="https://github.com/tanc7/EXOCET-AV-Evasion/raw/master/exocetdemo.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Reason for the name
 
 On May 4th, 1982, during the Falklands War, a squadron of Argentinan Super Eterdards launched a French made Exocet missile at the HMS Sheffield. Despite the Royal Navy's attempts to stop the missile, one struck, sinking the Sheffield. That incident literally put Argentina on the map as a show of force against a global colonial power.
 
-![](https://www.theguardian.com/uk-news/2017/oct/15/exocet-missile-how-sinking-hms-sheffield-made-famous)
+<a href="https://www.theguardian.com/uk-news/2017/oct/15/exocet-missile-how-sinking-hms-sheffield-made-famous">News Article of the sinking of the HMS Sheffield</a>
 
-Very much like how Onel de Guzman's actions with the ILOVEYOU virus put the Philippines on the map as a cyber threat. ![](
-https://en.wikipedia.org/wiki/ILOVEYOU)
+Very much like how Onel de Guzman's actions with the ILOVEYOU virus put the Philippines on the map as a cyber threat. 
+
+<a href="https://en.wikipedia.org/wiki/ILOVEYOU">ILOVEYOU Virus on Wikipedia</a>
