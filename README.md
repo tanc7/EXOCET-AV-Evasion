@@ -41,7 +41,7 @@ EXOCET is written entirely in Go.
 
 EXOCET, regardless of which binary you use to run it, requires Golang to work. By default, it generates a crypter .go file.
 
-1. Windows users: Install Go here ![](https://golang.org/doc/install)
+1. Windows users: <a href="https://golang.org/doc/install">Install Go Here</a>
 2. Linux users: run `sudo apt-get update && sudo apt-get install -y golang`
 
 ## To run it
