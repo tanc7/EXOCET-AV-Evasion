@@ -6,7 +6,7 @@
 changtan@listerunlimited.com
 <br>
 
-![]()
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/nodetections.png)
 
 EXOCET is superior to Metasploit's "Evasive Payloads" modules as EXOCET uses AES-256 in GCM Mode (Galois/Counter Mode). Metasploit's Evasion Payloads uses a easy to detect RC4 encryption. While RC4 can decrypt faster, AES-256 is much more difficult to ascertain the intent of the malware.
 
@@ -65,4 +65,13 @@ If you are targeting Windows systems, it's highly recommended that you use `EXOC
 
 # EXOCET live demo
 
-![]()
+![](https://github.com/tanc7/EXOCET-AV-Evasion/raw/master/exocetdemo.mp4)
+
+# Reason for the name
+
+On May 4th, 1982, during the Falklands War, a squadron of Argentinan Super Eterdards launched a French made Exocet missile at the HMS Sheffield. Despite the Royal Navy's attempts to stop the missile, one struck, sinking the Sheffield. That incident literally put Argentina on the map as a show of force against a global colonial power.
+
+![](https://www.theguardian.com/uk-news/2017/oct/15/exocet-missile-how-sinking-hms-sheffield-made-famous)
+
+Very much like how Onel de Guzman's actions with the ILOVEYOU virus put the Philippines on the map as a cyber threat. ![](
+https://en.wikipedia.org/wiki/ILOVEYOU)
