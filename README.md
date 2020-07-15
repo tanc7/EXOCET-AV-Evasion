@@ -6,6 +6,8 @@
 changtan@listerunlimited.com
 <br>
 
+![](https://upload.wikimedia.org/wikipedia/en/4/46/Exocet_impact.jpg)
+<br>
 ![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/nodetections.png)
 
 EXOCET is superior to Metasploit's "Evasive Payloads" modules as EXOCET uses AES-256 in GCM Mode (Galois/Counter Mode). Metasploit's Evasion Payloads uses a easy to detect RC4 encryption. While RC4 can decrypt faster, AES-256 is much more difficult to ascertain the intent of the malware.
