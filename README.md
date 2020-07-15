@@ -12,7 +12,11 @@ EXOCET is superior to Metasploit's "Evasive Payloads" modules as EXOCET uses AES
 
 However, it is possible to use Metasploit to build a Evasive Payload, and then chain that with EXOCET. So EXOCET will decrypt via AES-256, and then the Metasploit Evasive Payload then decrypts itself from RC4.
 
-Much like my previous project, DarkLordObama, this toolkit is designed to be a delivery/launch vehicle, much like Veil-Evasion does. ![](https://github.com/tanc7/dark-lord-obama). However, EXOCET is not limited to a single codebase or platforms that are running Python. EXOCET works on ALL supported platforms and architectures that Go supports.
+Much like my previous project, DarkLordObama, this toolkit is designed to be a delivery/launch vehicle, much like Veil-Evasion does. 
+
+![](https://github.com/tanc7/dark-lord-obama)
+
+However, EXOCET is not limited to a single codebase or platforms that are running Python. EXOCET works on ALL supported platforms and architectures that Go supports.
 
 # Exocet Overview
 
