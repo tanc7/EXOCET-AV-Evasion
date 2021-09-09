@@ -14,6 +14,27 @@ I need a bit of help, because I successfully implemented CGO to execute encrypte
 
 Once I figure this out, CGO was a pain in the ass to implement, we can now create crypters that execute INLINE-ASSEMBLY. Which was considered a impossibility until now.
 
+# Come play around with the shellcode crypter and executor while you help me fix these memory access violation bugs
+
+Note this requires Golang and the MinGW toolchain to be installed on Windows with you running and generating the shellcode on Windows. The reason why, is because CGO cannot be cross-compiled like our other EXOCET modules. To install the toolchain you need to go to [https://www.msys2.org/](https://www.msys2.org/) and follow the guide. Then you must add gcc to your environment variables in Windows
+
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/sysenv.png)
+
+
+**Step 1: Generate shellcode, this could be from msfvenom Meterpreter payloads, Cobalt Strike Beacons, or your own custom shellcode in C compatible format**
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/generate-shellcode.png)
+
+**Step 2: Copy only the bytes of the shellcode, excluding the quotes into a text file like sc.txt**
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/copy-shellcode.png)
+
+**Step 3: Your shellcode file should look like this. Raw shellcode**
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/Shellcode-File.png)
+
+**Step 4: Now run the command `go run exocet-shellcode-exec.go sc.txt shellcodetest.go KEY`**
+
+**Step 5: You can attempt to run it but you'll run into memory access violation errors for some reason, which I am still working on**
+
+
 
 ![](https://upload.wikimedia.org/wikipedia/en/4/46/Exocet_impact.jpg)
 <br>
