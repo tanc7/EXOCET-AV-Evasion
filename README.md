@@ -6,6 +6,15 @@
 changtan@listerunlimited.com
 <br>
 
+# Upcoming update! Direct encrypted shellcode execution!
+
+I need a bit of help, because I successfully implemented CGO to execute encrypted shellcode but it is throwing memory access violations exit status 0xc0000005. It shouldn't be anything related to DEP (Data Execution Prevention) because the file CGOTest/working-template-shellcode-executor.go did run.
+
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/shellcode-exec-works.png)
+
+Once I figure this out, CGO was a pain in the ass to implement, we can now create crypters that execute INLINE-ASSEMBLY. Which was considered a impossibility until now.
+
+
 ![](https://upload.wikimedia.org/wikipedia/en/4/46/Exocet_impact.jpg)
 <br>
 ![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/nodetections.png)
