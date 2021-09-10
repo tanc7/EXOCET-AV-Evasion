@@ -34,6 +34,13 @@ Note this requires Golang and the MinGW toolchain to be installed on Windows wit
 
 **Step 5: You can attempt to run it but you'll run into memory access violation errors for some reason, which I am still working on**
 
+# Note on Memory Access Violation Problem
+
+Apparently, aside from the major limitations of CGO that prohibit or dramatically frustrates cross-compilation, the issue is that the shellcode we want to execute is landing in a section of memory (analyzed in WinDBG x64) that is not RWX. In other words, unless we write C code that explicitly allows execution in memory of the shellcode, it will always throw access violation errors.
+
+The other method, that I observed other developers of rudimentary Go modules [https://gist.github.com/mgeeky/bb0fd5652b234fbd1c7630d7e5c8542d](https://gist.github.com/mgeeky/bb0fd5652b234fbd1c7630d7e5c8542d), is that they use Go's Windows API to interact with ntdll.dll and kernel32.dll to call VirtualAlloc and specify areas of RWX memory pages. This method works better, but it seems that the shellcode must be in num-transformed format only for it to work.
+
+I am still working on this you guys. I may combine multiple programming languages together to write a proper shellcode execution module
 
 
 ![](https://upload.wikimedia.org/wikipedia/en/4/46/Exocet_impact.jpg)
