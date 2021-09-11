@@ -31,6 +31,8 @@ Basically...
 2. It then encrypts them and produces it's own Go file
 3. Then that Go file can be cross-compiled to 99% of known architectures
 4. Upon execution, the encrypted payload is written to the disk and immediately executed on the command line
+5. Alternatively, instead of a file-drop, it will execute the reconstitute shellcode in memory using amenzhinsky's go-memexec module [github.com/amenzhinsky/go-memexec](github.com/amenzhinsky/go-memexec)
+6. **A custom shellcode executor is in the works**, it takes ordinary C shellcode and after num-transform, it will run it by creating a new process after allocating the correct virtual address space and granting it RWX permissions on Windows
 
 That means 32-bit, and 64-bit architectures, and it works on Linux, Windows, Macs, Unix, Android, iPhone, etc. You take, anything, and I mean ANYTHING, like the 1988 Morris Worm that nearly brought down the internet (which exploited a flaw in the fingerd listener daemon on UNIX), and make it a viable cyberweapon again.
 
