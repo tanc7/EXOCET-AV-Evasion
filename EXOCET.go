@@ -1,7 +1,7 @@
 package main
 
 import (
-	k "exocetgithub.com/tanc7/EXOCET-AV-Evasion/KeyGenerator"
+	k "github.com/tanc7/EXOCET-AV-Evasion/KeyGenerator"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/md5"
