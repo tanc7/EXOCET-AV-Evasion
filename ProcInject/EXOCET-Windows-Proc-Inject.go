@@ -1,4 +1,4 @@
-package main
+package ProcInject
 
 import (
 	"crypto/aes"
