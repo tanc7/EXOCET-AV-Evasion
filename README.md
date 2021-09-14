@@ -9,9 +9,8 @@ changtan@listerunlimited.com
 
 ![](https://upload.wikimedia.org/wikipedia/en/4/46/Exocet_impact.jpg)
 <br>
-![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/nodetections.png)
-
 EXOCET is superior to Metasploit's "Evasive Payloads" modules as EXOCET uses AES-256 in GCM Mode (Galois/Counter Mode). Metasploit's Evasion Payloads uses a easy to detect RC4 encryption. While RC4 can decrypt faster, AES-256 is much more difficult to ascertain the intent of the malware.
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/nodetections.png)
 
 However, it is possible to use Metasploit to build a Evasive Payload, and then chain that with EXOCET. So EXOCET will decrypt via AES-256, and then the Metasploit Evasive Payload then decrypts itself from RC4.
 
@@ -103,8 +102,6 @@ As it turns out, VirtualAlloc must be called from kernel32.dll and ntdll.dll to 
 
 Once I figure this out, CGO was a pain in the ass to implement, we can now create crypters that execute INLINE-ASSEMBLY. Which was considered a impossibility until now.
 
-# Come play around with the shellcode crypter and executor while you help me fix these memory access violation bugs
-
 Note this requires Golang and the MinGW toolchain to be installed on Windows with you running and generating the shellcode on Windows. The reason why, is because CGO cannot be cross-compiled like our other EXOCET modules. To install the toolchain you need to go to [https://www.msys2.org/](https://www.msys2.org/) and follow the guide. Then you must add gcc to your environment variables in Windows
 
 ![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/sysenv.png)
@@ -130,3 +127,18 @@ Apparently, aside from the major limitations of CGO that prohibit or dramaticall
 The other method, that I observed other developers of rudimentary Go modules [https://gist.github.com/mgeeky/bb0fd5652b234fbd1c7630d7e5c8542d](https://gist.github.com/mgeeky/bb0fd5652b234fbd1c7630d7e5c8542d), is that they use Go's Windows API to interact with ntdll.dll and kernel32.dll to call VirtualAlloc and specify areas of RWX memory pages. This method works better, but it seems that the shellcode must be in num-transformed format only for it to work.
 
 I am still working on this you guys. I may combine multiple programming languages together to write a proper shellcode execution module
+
+# Note on Apple M1 Chips for precompiled binaries
+
+Unfortunately I am running into errors for making a pre-compiled binary for MacBooks running the new M1 CPUs. It may be a issue with my Golang installation
+
+```
+┌──(root💀kali)-[/opt/EXOCET-AV-Evasion]
+└─# GOOS=darwin GOARCH=arm64 go build exocet.go 
+# command-line-arguments
+/usr/lib/go-1.15/pkg/tool/linux_amd64/link: running gcc failed: exit status 1
+/tmp/go-link-477718799/go.o: file not recognized: file format not recognized
+collect2: error: ld returned 1 exit status
+```
+
+Either way, you still require Golang to compile or cross-compile the malware to the platform you are targeting. 
