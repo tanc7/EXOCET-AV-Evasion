@@ -9,7 +9,7 @@ changtan@listerunlimited.com
 
 ![](https://upload.wikimedia.org/wikipedia/en/4/46/Exocet_impact.jpg)
 <br>
-![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/nodetections.png)
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/nodetections.png)
 
 EXOCET is superior to Metasploit's "Evasive Payloads" modules as EXOCET uses AES-256 in GCM Mode (Galois/Counter Mode). Metasploit's Evasion Payloads uses a easy to detect RC4 encryption. While RC4 can decrypt faster, AES-256 is much more difficult to ascertain the intent of the malware.
 
@@ -46,11 +46,15 @@ EXOCET, regardless of which binary you use to run it, requires Golang to work. B
 
 1. Windows users: <a href="https://golang.org/doc/install">Install Go Here</a>
 2. Linux users: run `sudo apt-get update && sudo apt-get install -y golang`
-3. You must install the memexec module, `go get github.com/amenzhinsky/go-memexec`
+3. You must install the EXOCET source files in golang `go get github.com/tanc7/EXOCET-AV-Evasion`
+4. Sub-requirements will also be downloaded and installed
+5. For Windows and Mac x64 Users, pre-compiled binaries are in the /bin folder
 
 ## To run it
 
-`go run EXOCET.go detectablemalware.exe outputmalware.go password123`, where password123 is your key. The longer and more random the key, the better it is able to evade detection from static binary analysis.
+`go run EXOCET.go detectablemalware.exe outputmalware.go`
+
+A key is automatically generated for you.
 
 For 64-bit Windows Targets...
 
@@ -95,7 +99,7 @@ Very much like how Onel de Guzman's actions with the ILOVEYOU virus put the Phil
 
 As it turns out, VirtualAlloc must be called from kernel32.dll and ntdll.dll to properly make the memory page where the shellcode lands, readable, writable, and executable, in other word, set the PAGE_EXECUTE_READWRITE to ON. Read the *Note on Memory Access Violation Problem* below.
 
-![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/shellcode-exec-works.png)
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/shellcode-exec-works.png)
 
 Once I figure this out, CGO was a pain in the ass to implement, we can now create crypters that execute INLINE-ASSEMBLY. Which was considered a impossibility until now.
 
@@ -103,17 +107,17 @@ Once I figure this out, CGO was a pain in the ass to implement, we can now creat
 
 Note this requires Golang and the MinGW toolchain to be installed on Windows with you running and generating the shellcode on Windows. The reason why, is because CGO cannot be cross-compiled like our other EXOCET modules. To install the toolchain you need to go to [https://www.msys2.org/](https://www.msys2.org/) and follow the guide. Then you must add gcc to your environment variables in Windows
 
-![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/sysenv.png)
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/sysenv.png)
 
 
 **Step 1: Generate shellcode, this could be from msfvenom Meterpreter payloads, Cobalt Strike Beacons, or your own custom shellcode in C compatible format**
-![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/generate-shellcode.png)
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/generate-shellcode.png)
 
 **Step 2: Copy only the bytes of the shellcode, excluding the quotes into a text file like sc.txt**
-![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/copy-shellcode.png)
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/copy-shellcode.png)
 
 **Step 3: Your shellcode file should look like this. Raw shellcode**
-![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/Shellcode-File.png)
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/Shellcode-File.png)
 
 **Step 4: Now run the command `go run exocet-shellcode-exec.go sc.txt shellcodetest.go KEY`**
 

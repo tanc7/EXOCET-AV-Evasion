@@ -172,7 +172,7 @@ The EXOCET Project. Part of the Slayer-Ranger's DSX Weapons Program.
 `)
 	args := os.Args
 	if len(os.Args) < 3 {
-		fmt.Printf("How to use:\r\n\tgo run EXOCET.go $PATH/malware outputMalware.go encryptionPassword\n")
+		fmt.Printf("How to use:\r\n\tgo run EXOCET.go $PATH/malware outputMalware.go\n")
 		os.Exit(3)
 	}
 	origMalware := args[1]
