@@ -1,0 +1,4 @@
+github.com/amenzhinsky/go-memexec v0.5.0 h1:Qjvz/0zFyUgyQL5xpO5y2NCYAlC51iWknV56crZePqs=
+github.com/amenzhinsky/go-memexec v0.5.0/go.mod h1:bVxiS9BgvUiRYXDggqSfHRpa5LIZI3wQJwHjhYpON/Y=
+golang.org/x/sys v0.0.0-20210903071746-97244b99971b h1:3Dq0eVHn0uaQJmPO+/aYPI/fRMqdrVDbu7MQcku54gg=
+golang.org/x/sys v0.0.0-20210903071746-97244b99971b/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=

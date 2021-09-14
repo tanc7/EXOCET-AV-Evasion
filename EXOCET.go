@@ -1,6 +1,7 @@
 package main
 
 import (
+	k "exocetgithub.com/tanc7/EXOCET-AV-Evasion/KeyGenerator"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/md5"
@@ -11,6 +12,7 @@ import (
 	"io/ioutil"
 	"os"
 )
+
 //https://www.thepolyglotdeveloper.com/2018/02/encrypt-decrypt-data-golang-application-crypto-packages/
 func createHash(key string) string {
 	hasher := md5.New()
@@ -169,13 +171,13 @@ func main() {
 The EXOCET Project. Part of the Slayer-Ranger's DSX Weapons Program.
 `)
 	args := os.Args
-	if len(os.Args) < 4 {
+	if len(os.Args) < 3 {
 		fmt.Printf("How to use:\r\n\tgo run EXOCET.go $PATH/malware outputMalware.go encryptionPassword\n")
 		os.Exit(3)
 	}
 	origMalware := args[1]
 	outputMalware := args[2]
-	encryptionPassword := args[3]
+	encryptionPassword := k.GenerateKey(64)
 	fmt.Printf("Original malware sample selected: %s\n",origMalware)
 	fmt.Printf("Output malware sample selected: %s\n",outputMalware)
 	fmt.Printf("Encryption password for AES Galois/Counter Mode %s\n", encryptionPassword)
