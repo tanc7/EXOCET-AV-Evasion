@@ -53,27 +53,28 @@ EXOCET, regardless of which binary you use to run it, requires Golang to work. B
 
 `go run EXOCET.go detectablemalware.exe outputmalware.go`
 
-A key is automatically generated for you.
+A key is automatically generated for you. The key is 64-characters long and is entirely composed of bash and cmd.exe shell pipe redirectors to confuse and disrupt brute-forcing attempts against the key by causing unpredictable, destructive behavior on the forensic analyst's device.
 
 For 64-bit Windows Targets...
 
-`env GOOS=windows GOARCH=amd64 go build outputmalware.go`
+`env GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o outputMalware.exe outputmalware.go`
 
 And out comes a `outputmalware.exe` file
 
 For 64-bit MacOS Targets
 
-`env GOOS=darwin GOARCH=amd64 go build outputmalware.go`
+`env GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o outputMalware.macho outputmalware.go`
 
 For 64-bit Linux Targets
 
-`env GOOS=linux GOARCH=amd64 go build outputmalware.go`
+`env GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o outputMalware.elf outputmalware.go`
 
 See this reference on github for your parameters for other operating systems like Android <a href="https://gist.github.com/asukakenji/f15ba7e588ac42795f421b48b8aede63">Reference for Go Cross Compilation</a>
 
-Furthermore, there are prebuilt binaries that I have made, meaning you just have to run `./EXOCET` or `EXOCET-Windows.exe`
+Note that the key can still be found with the `strings` command, please use the `upx-ucl` command to pack binary to conceal the key.
 
-If you are targeting Windows systems, it's highly recommended that you use `EXOCET-Windows-Proc-Inject` or `EXOCET-Windows-Process-injection.exe` instead. As it will immediately search and query any running commonly running Windows processes to inject Meterpreter payloads into.
+
+Furthermore, there are prebuilt binaries that I have made, meaning you just have to run `./EXOCET` or `EXOCET-Windows.exe`
 
 
 # EXOCET live demo
