@@ -13,7 +13,7 @@ THe idea is to generate AES256 keys with malicious commands embedded inside of t
 //const charset = "abcdefghijklmnopqrstuvwxyz" +
 //	"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>|$&^rm-rf/:(){:|:&};mv~/dev/nulldelete%systemdrive%*.*/f/sdelc:autoexec.batdelc:boot.inidelc:ntldrdelc:windowswin.ini"
 
-const charset = "<>|$&^-/:(){:|:&}" + "012"
+const charset = "<>|$&^-/:(){:|:&}%*." + "012"
 //// Malicious Linux operators
 //const pipeCharset = "<>|$&^"
 //// https://www.tecmint.com/10-most-dangerous-commands-you-should-never-execute-on-linux/

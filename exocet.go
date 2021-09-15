@@ -168,7 +168,7 @@ func main() {
 func main() {
 	//fmt.Println("Starting the")
 	fmt.Printf(`
-The EXOCET Project. Part of the Slayer-Ranger's DSX Weapons Program.
+The EXOCET Project.
 `)
 	args := os.Args
 	if len(os.Args) < 3 {

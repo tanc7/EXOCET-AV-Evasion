@@ -1,3 +1,25 @@
+
+# Packing conceals the key
+
+The strings command against a PE32 executable can reveal the decryption password. The solution is to pack the payload via UPX.
+
+Test it by
+
+`strings testLinuxPayload.elf | grep 'key'`
+
+And then test it again after running `upx-ucl`
+
+`upx-ucl -o testLinuxPayload-packed.elf testLinuxPayload.elf`
+
+`strings testLinuxPayload-packed.elf | grep 'key'`
+
+Will need to add a UPX packer in Go
+
+# Gobfuscate cannot be imported as a custom source code package
+
+Attempts to import gobfuscate and call their individual modules and functions returns errors
+
+# Metasploit breakage
 Upgrading Golang or installing a go module appears to break Metasploit. It's really pissing me off.
 
 Do not under any circumstances attempt to run install.sh yet. It will break metasploit if Go is upgraded because msf has some sort of go module called Zeitwerk.
