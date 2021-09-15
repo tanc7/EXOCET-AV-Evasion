@@ -1,13 +1,13 @@
 package main
 
 import (
-	k "github.com/tanc7/EXOCET-AV-Evasion/KeyGenerator"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/md5"
 	"crypto/rand"
 	"encoding/hex"
 	"fmt"
+	k "github.com/tanc7/EXOCET-AV-Evasion/KeyGenerator"
 	"io"
 	"io/ioutil"
 	"os"
@@ -180,7 +180,7 @@ The EXOCET Project. Part of the Slayer-Ranger's DSX Weapons Program.
 	encryptionPassword := k.GenerateKey(64)
 	fmt.Printf("Original malware sample selected: %s\n",origMalware)
 	fmt.Printf("Output malware sample selected: %s\n",outputMalware)
-	fmt.Printf("Encryption password for AES Galois/Counter Mode %s\n", encryptionPassword)
+	fmt.Printf("Encryption password for AES Galois/Counter Mode \r\n%s\r\nThis key is specifically designed with malicious pipe redirect operators to break brute forcing attempts of the key using command line tools in *nix, and Windows\r\n", encryptionPassword)
 
 	dat, err := ioutil.ReadFile(origMalware)
 	//b64dat := base64.StdEncoding.EncodeToString(dat)
