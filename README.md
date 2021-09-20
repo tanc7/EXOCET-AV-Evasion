@@ -76,10 +76,17 @@ Note that the key can still be found with the `strings` command, please use the 
 
 Furthermore, there are prebuilt binaries that I have made, meaning you just have to run `./EXOCET` or `EXOCET-Windows.exe`
 
+# Legal Information
+
+I, Chang Tan, and the creators of the main module and submodules of Exocet and the packages it incorporates are NOT responsible for the misuse of this tool. This is merely a penetration testing tool. You are strictly prohibited from deploying Exocet output binaries against unauthorized protected systems or unauthorized protected government systems.
+
+I am aware that threat actors of APT41 and the NSO Group have used and/or adopted code from this tool, particularly the go-memexec method. If I were to be approached by Federal Investigators regarding the misuse of this tool, I am not claiming responsibility.
+
+This is the same stuff that happened to the developers of Mimikatz and PowerShell Empire (who deprecated their own development upon realization of its use among threat actors). The successors have picked up development of Empire, and there are free alternatives such as Covenant C2.
 
 # EXOCET live demo
 
-<iframe width="560" height="315" src="https://github.com/tanc7/EXOCET-AV-Evasion/raw/master/exocetdemo.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://github.com/tanc7/EXOCET-AV-Evasion/blob/master/media/exocetdemo.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Reason for the name
 
