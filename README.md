@@ -98,6 +98,10 @@ Very much like how Onel de Guzman's actions with the ILOVEYOU virus put the Phil
 
 <a href="https://en.wikipedia.org/wiki/ILOVEYOU">ILOVEYOU Virus on Wikipedia</a>
 
+# Incoming update, notes and ambitions
+
+[](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/Screenshot%20(208).png)
+
 # Upcoming update! Direct encrypted shellcode execution!
 
 ~~I need a bit of help, because I successfully implemented CGO to execute encrypted shellcode but it is throwing memory access violations exit status 0xc0000005. It shouldn't be anything related to DEP (Data Execution Prevention) because the file CGOTest/working-template-shellcode-executor.go did run.~~
