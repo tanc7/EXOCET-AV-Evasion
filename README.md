@@ -100,7 +100,7 @@ Very much like how Onel de Guzman's actions with the ILOVEYOU virus put the Phil
 
 # Incoming update, notes and ambitions
 
-[](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/Screenshot%20(208).png)
+![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/Screenshot%20(208).png)
 
 # Upcoming update! Direct encrypted shellcode execution!
 
