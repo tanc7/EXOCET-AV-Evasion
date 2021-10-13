@@ -102,7 +102,29 @@ Very much like how Onel de Guzman's actions with the ILOVEYOU virus put the Phil
 
 ![](https://raw.githubusercontent.com/tanc7/EXOCET-AV-Evasion/master/media/Screenshot%20(208).png)
 
-# Upcoming update! Direct encrypted shellcode execution!
+So this month, and the next month is going to be a busy month for me, and there will be delays in implementing these methods. But I am excited to get started on implementing new AV evasion techniques such as...
+
+1. Inline hooking
+2. Obfuscation by emulating BlackRota and the gobfuscate module
+3. Process hollowing
+4. Reflective DLL injection
+5. Remote process injection
+6. ThreadLocalStorage Callbacks
+7. Registration of Top-Level Exception Handlers
+8. Custom UPX packing
+
+**I am a very busy man**, I have the following priorities and I would like to request some help, some pull requests to aid in the project. Since I have the following things to do
+
+1. A court appearance in late October
+2. National Cyber League
+3. Accounting and Finance Classes, Computer Science was NEVER my college major and in the following weeks I will have exams back-to-back
+4. Federal Supervised Release Conditions and the FBI trying to implicate me in new unproven crimes. I have dash camera videos I uploaded to the cloud to prove it that I am sending to my lawyers. I have documented multiple attacks against me, vandalism of my car, my house, filed police reports and counter reports and will be building my case to file a Federal lawsuit. One of the perpetrators, who ripped out my front bumper of my car, has been arrested.
+5. A private project involving interaction with the CoinGeckoAPI
+6. Running the cryptoscopeinitiative.org, a to-be-filed 501c3 Non-Profit Organization
+7. Teaching three online classes on Exploit Development
+
+
+# Upcoming update! Direct encrypted shellcode execution! (Implemented in test versions, not released yet)
 
 ~~I need a bit of help, because I successfully implemented CGO to execute encrypted shellcode but it is throwing memory access violations exit status 0xc0000005. It shouldn't be anything related to DEP (Data Execution Prevention) because the file CGOTest/working-template-shellcode-executor.go did run.~~
 
