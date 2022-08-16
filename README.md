@@ -11,7 +11,7 @@ changtan@listerunlimited.com
 # Updated EXOCET Usage
 
 
-Make sure you pack your payloads to avoid any leaks of the crypter's key and further frustrate malware analysts. A commercial top-of-the-line packer like Themida is NOT required. It would raise further suspicion without something like a code-signing certificate. Without code-signing certificate, on Windows systems, SmartScreen is automatically triggered. This is the rule for all potentially unwanted programs or "PUPs". 
+Make sure you pack your payloads to avoid any leaks of the crypter's key and further frustrate malware analysts. A commercial top-of-the-line packer like Themida is NOT required. It would raise further suspicion without something like a code-signing certificate. Without code-signing certificate, on Windows systems, SmartScreen is automatically triggered. This is the rule for all potentially unwanted programs or "PUPs", meaning all malware payloads, beacons, geacons, remote access trojans, etc., requires a code signing certificate. Your money is better spent on buying a code-signing cert than some top-of-the-line packer.
 
 ```
 go run exocet.go malware.exe outputmalware.go
