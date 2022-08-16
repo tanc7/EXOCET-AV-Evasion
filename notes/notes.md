@@ -1,3 +1,20 @@
+# Techniques to add from OSEP
+
+1. AV Sandbox Detection by using Golang to call VirtualAllocExNuma
+2. Sleep timers (very easy to implement)
+3. Multi-stage payloads involving Windows Script Host (cscript.exe) shellcode runners
+4. Offering a option for automatic code-signing if the user can provide valid code-signing certificates (this is already a feature in Cobalt Strike and many other C2 Frameworks)
+5. Part of the multi-stage payloads require AMSI bypasses
+6. PowerPick module from PowerSploit to allow execution of Powershell commands without Powershell
+7. Polymorphic function (alphanumeric upper-lower) generation to evade signature detection technique (on scantime of the decrypter stubs), easily implemented since that's the point of Exocet. To generate a cross-compilable go file to serve as a delivery vehicle, any detection resulting after that is a issue with the payload itself
+8. Converting all of the techniques from the OSEP course into Golang rather than C#.
+9. Inline-hooking and patching of freshly spawned processes with shellcode trampolines
+10. (Anti-debugging) ThreadLocalStorage Callbacks
+11. (Anti-debugging) Registration of Top-Level Exception Handlers
+12. Easy platform targeting by command line (all stages of the shellcode, including Windows Script Host Shellcode Runners, droppers, powershell modules, bypasses, and the final obfuscated RAT) will be auto-generateed in a finished folder just by specifying target platform (Windows, Mac, Linux, Unix) and architecture, as well as the automatic compiling, packing, and stripping of debugging symbols. Just specify the target platform (ex. -windows) and architecture (-amd64) and all instructions and stages will be premade for you.
+13. Microsoft Doc and Excel Macro and VBA targeting. Allow specification of specific Microsoft Office Suite Versions before a VBA-stomp. Even though the OSEP performs a proof of concept with a hex editor, a generic word document can be reconstructed as a template payload with write primitives, much like how a malicious zip file can be reconstructed with Python scripts by reconstructing the headers that describe the document. **Actually, part of the docx, xlsx, docm, and xlsm file IS A ZIP FILE, therefore you have to reconstruct that as well.**
+
+**I have seen personally, the deployment of exocet and analysis of payloads by threat actors for some time. From what I have personally seen, they have been used as a stager to deploy Beacons, Geacons (Golang Beacons for non Windows NT architectures) and used as a second-to-last stage payload**
 
 # Packing conceals the key
 
